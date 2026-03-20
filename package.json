@@ -1,0 +1,64 @@
+{
+  "name": "farcaster-agent-sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for building, reading, executing, and streaming Farcaster Agent actions",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./manifest": {
+      "import": "./dist/manifest/index.mjs",
+      "require": "./dist/manifest/index.js",
+      "types": "./dist/manifest/index.d.ts"
+    },
+    "./compiler": {
+      "import": "./dist/compiler/index.mjs",
+      "require": "./dist/compiler/index.js",
+      "types": "./dist/compiler/index.d.ts"
+    },
+    "./executor": {
+      "import": "./dist/executor/index.mjs",
+      "require": "./dist/executor/index.js",
+      "types": "./dist/executor/index.d.ts"
+    },
+    "./events": {
+      "import": "./dist/events/index.mjs",
+      "require": "./dist/events/index.js",
+      "types": "./dist/events/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": ["farcaster", "agent", "sdk", "web3", "mini-app", "ai"],
+  "license": "MIT",
+  "dependencies": {
+    "viem": "^2.21.0",
+    "zod": "^3.23.8",
+    "eventemitter3": "^5.0.1",
+    "ts-morph": "^23.0.0",
+    "tinyglobby": "^0.2.9",
+    "farcaster-agent-compiler": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "tsup": "^8.3.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^22.0.0"
+  },
+  "peerDependencies": {
+    "viem": "^2.0.0"
+  },
+  "peerDependenciesMeta": {
+    "viem": { "optional": true }
+  }
+}
