@@ -24,14 +24,12 @@ export class ApiExecutor {
 
       let response: Response;
       try {
-        response = await fetch(url, {
-          method,
-          headers,
-          signal: controller.signal,
-          body: method !== 'GET' && method !== 'HEAD'
-            ? JSON.stringify(params)
-            : undefined,
-        });
+   // After
+const hasBody = method !== 'GET' && method !== 'HEAD';
+const fetchInit: RequestInit = hasBody
+  ? { method, headers, signal: controller.signal, body: JSON.stringify(params) }
+  : { method, headers, signal: controller.signal };
+response = await fetch(url, fetchInit);
       } finally {
         clearTimeout(timer);
       }

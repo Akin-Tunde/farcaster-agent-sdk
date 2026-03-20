@@ -4,7 +4,8 @@ import type { AgentManifest, ValidationResult } from '../types';
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
 const ParameterPropertySchema = z.object({
-  type: z.enum(['string', 'number', 'boolean', 'array', 'object', 'any']),
+  // Compiler may emit raw TS/Solidity types — accept any string, normalise known ones
+  type: z.string(),
   description: z.string().optional(),
   required: z.boolean().optional(),
   enum: z.array(z.string()).optional(),

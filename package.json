@@ -7,29 +7,29 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     },
     "./manifest": {
+      "types": "./dist/manifest/index.d.ts",
       "import": "./dist/manifest/index.mjs",
-      "require": "./dist/manifest/index.js",
-      "types": "./dist/manifest/index.d.ts"
+      "require": "./dist/manifest/index.js"
     },
     "./compiler": {
+      "types": "./dist/compiler/index.d.ts",
       "import": "./dist/compiler/index.mjs",
-      "require": "./dist/compiler/index.js",
-      "types": "./dist/compiler/index.d.ts"
+      "require": "./dist/compiler/index.js"
     },
     "./executor": {
+      "types": "./dist/executor/index.d.ts",
       "import": "./dist/executor/index.mjs",
-      "require": "./dist/executor/index.js",
-      "types": "./dist/executor/index.d.ts"
+      "require": "./dist/executor/index.js"
     },
     "./events": {
+      "types": "./dist/events/index.d.ts",
       "import": "./dist/events/index.mjs",
-      "require": "./dist/events/index.js",
-      "types": "./dist/events/index.d.ts"
+      "require": "./dist/events/index.js"
     }
   },
   "scripts": {

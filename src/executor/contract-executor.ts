@@ -43,7 +43,7 @@ export class ContractExecutor {
           abi,
           functionName: abiFunction,
           args,
-          ...(action.chainId ? { chainId: action.chainId } : {}),
+          ...(action.chainId ? { chainId: action.chainId } : {}), // chainId optional: compiler may not emit it
         });
       } else {
         // walletClient.writeContract
@@ -55,7 +55,7 @@ export class ContractExecutor {
           abi,
           functionName: abiFunction,
           args,
-          ...(action.chainId ? { chainId: action.chainId } : {}),
+          ...(action.chainId ? { chainId: action.chainId } : {}), // chainId optional: compiler may not emit it
         });
       }
 

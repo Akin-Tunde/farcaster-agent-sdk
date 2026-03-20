@@ -21,21 +21,36 @@ export class AgentCompiler {
       ? path.resolve(options.output)
       : path.join(projectPath, 'agent.json');
 
-    // Dynamically import the compiler modules so they're only loaded in Node
-    const [
-      { DiscoveryService },
-      { TSParser },
-      { ManifestGenerator },
-    ] = await Promise.all([
-      import('farcaster-agent-compiler/dist/discovery/service.js'),
-      import('farcaster-agent-compiler/dist/parser/ts-parser.js'),
-      import('farcaster-agent-compiler/dist/generator/json.js'),
-    ]).catch(() => {
+    // Dynamically import the compiler — try main entry first, then dist paths
+    let DiscoveryService: any, TSParser: any, ManifestGenerator: any;
+    try {
+      // Attempt 1: main package entry (if compiler re-exports internals)
+      const mod = await import('farcaster-agent-compiler').catch(() => null);
+      DiscoveryService = mod?.DiscoveryService;
+      TSParser = mod?.TSParser;
+      ManifestGenerator = mod?.ManifestGenerator;
+
+      // Attempt 2: known dist subpaths
+      if (!DiscoveryService) {
+        const [d, p, g] = await Promise.all([
+          import('farcaster-agent-compiler/dist/discovery/service.js').catch(() => null),
+          import('farcaster-agent-compiler/dist/parser/ts-parser.js').catch(() => null),
+          import('farcaster-agent-compiler/dist/generator/json.js').catch(() => null),
+        ]);
+        DiscoveryService = d?.DiscoveryService;
+        TSParser = p?.TSParser;
+        ManifestGenerator = g?.ManifestGenerator;
+      }
+
+      if (!DiscoveryService || !TSParser || !ManifestGenerator) {
+        throw new Error('Could not resolve compiler internals');
+      }
+    } catch {
       throw new Error(
-        'farcaster-agent-compiler is required to use AgentCompiler. ' +
+        'farcaster-agent-compiler is required to use AgentCompiler.\n' +
         'Install it: npm install farcaster-agent-compiler'
       );
-    });
+    }
 
     const discovery = new DiscoveryService(projectPath);
     const files: string[] = await discovery.findRelevantFiles();

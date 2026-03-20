@@ -68,13 +68,13 @@ export class ActionExecutor {
         return this.contractExecutor.execute<T>(action as ContractAction, params, ctx);
       case 'function':
         return this.functionExecutor.execute<T>(action as FunctionAction, params, ctx);
-      default:
-        return {
-          success: false,
-          error: `Unknown action type: ${(action as AgentAction).type}`,
-          action: action.name,
-          durationMs: 0,
-        };
+     default:
+  return {
+    success: false,
+    error: `Unknown action type: ${(action as AgentAction).type}`,
+    action: (action as AgentAction).name,   // ← cast it
+    durationMs: 0,
+  };
     }
   }
 

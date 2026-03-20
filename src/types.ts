@@ -1,7 +1,8 @@
 // ─── Parameter & Schema Types ─────────────────────────────────────────────────
 
 export interface ParameterProperty {
-  type: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'any';
+  /** Core JSON-schema types + 'any'. The compiler may also emit raw TS/Solidity type strings. */
+  type: 'string' | 'number' | 'boolean' | 'array' | 'object' | 'any' | (string & {});
   description?: string;
   required?: boolean;
   enum?: string[];
