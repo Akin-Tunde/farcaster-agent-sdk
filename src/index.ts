@@ -36,3 +36,5 @@ export type {
   ParameterSchema,
   ReturnSchema,
 } from './types';
+
+export { verifyFarcasterSignature, getFidFromPublicKey  } from './auth';
